@@ -15,7 +15,7 @@ export default function Navbar({
           <div className="flex flex-shrink-0 items-center">
             <h1 className="text-lg md:text-2xl text-purple-400 flex justify-center items-center gap-3">
               <FaBookReader />
-              <span>Library Management System</span>
+              <span className="text-purple-800">Library Management System</span>
             </h1>
           </div>
         </div>
