@@ -32,7 +32,7 @@ const BookForm: React.FC<BookFormProps> = ({
   return (
     <>
       {isVisible && (
-        <div className="w-full h-full bg-white/80 absolute z-50">
+        <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
             className={`w-[95%] max-w-[800px] h-auto p-4 bg-white absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity  ${
               showForm ? "opacity-100" : "opacity-0"
