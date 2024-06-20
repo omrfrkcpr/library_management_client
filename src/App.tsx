@@ -1,5 +1,7 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import axios from "axios";
+import BookList from "./components/BookList";
 
 const initialFormState = {
   title: "",
@@ -12,7 +14,18 @@ const initialFormState = {
 };
 
 function App() {
-  const [form, setForm] = useState(initialFormState);
+  const [form, setForm] = useState<Form>(initialFormState);
+  const [books, setBooks] = useState<Book[]>([]);
+
+  const getBooksData = async () => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER_HOST}:${
+        import.meta.env.VITE_SERVER_PORT
+      }/books`
+    );
+    // console.log(response.data.books);
+    setBooks(response.data.books);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,15 +33,25 @@ function App() {
     setForm(initialFormState);
 
     try {
-      await axios.post("/books", form);
+      await axios.post(
+        `${import.meta.env.VITE_SERVER_HOST}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/books`,
+        form
+      );
+      getBooksData();
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    getBooksData();
+  }, []);
+
   return (
     <div>
-      Library Management System`
+      Library Management System
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title</label>
@@ -94,6 +117,7 @@ function App() {
         </div>
         <button type="submit">Submit Book</button>
       </form>
+      <BookList books={books} />
     </div>
   );
 }

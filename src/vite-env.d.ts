@@ -7,3 +7,23 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Form {
+  title: string;
+  author: string;
+  genre: string;
+  isbn: string;
+  publicationYear: number;
+  description: string;
+  image: string;
+}
+
+interface Book extends Form {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface BookListProps {
+  books: Book[];
+}
