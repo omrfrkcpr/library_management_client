@@ -9,7 +9,7 @@ const initialFormState = {
   title: "",
   author: "",
   genre: "",
-  isbn: 0,
+  isbn: "",
   publicationYear: 0,
   description: "",
   image: "",

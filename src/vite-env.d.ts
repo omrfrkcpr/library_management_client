@@ -12,7 +12,7 @@ interface Form {
   title: string;
   author: string;
   genre: string;
-  isbn: number;
+  isbn: string;
   publicationYear: number;
   description: string;
   image: string;
