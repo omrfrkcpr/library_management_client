@@ -19,12 +19,12 @@ export default function Navbar({
             </h1>
           </div>
         </div>
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div className="absolute inset-y-2 right-2 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <button
             onClick={() => setShowForm(true)}
             className="bg-purple-500 text-white hover:text-purple-500 font-bold hover:bg-gray-100 border border-purple-500 rounded-full duration-300"
           >
-            <IoIosAdd className="w-10 h-10" />
+            <IoIosAdd className="w-7 h-7 md:w-10 md:h-10" />
           </button>
         </div>
       </div>

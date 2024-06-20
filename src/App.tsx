@@ -63,7 +63,9 @@ function App() {
         setShowForm={setShowForm}
       />
       <Navbar setShowForm={setShowForm} />
-      <BookList books={books} />
+      <div className="">
+        <BookList books={books} />
+      </div>
     </div>
   );
 }
