@@ -12,10 +12,11 @@ interface Form {
   title: string;
   author: string;
   genre: string;
-  isbn: string;
+  isbn: number;
   publicationYear: number;
   description: string;
   image: string;
+  detailUrl: string;
 }
 
 interface Book extends Form {
