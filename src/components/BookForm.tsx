@@ -34,7 +34,7 @@ const BookForm: React.FC<BookFormProps> = ({
       {isVisible && (
         <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
-            className={`w-[85%] max-w-[400px] h-auto p-10 bg-white absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
+            className={`w-[85%] max-w-[400px] h-auto p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
               showForm ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -46,6 +46,9 @@ const BookForm: React.FC<BookFormProps> = ({
               onSubmit={handleSubmit}
               className="flex flex-col space-y-2 mb-4"
             >
+              <div className="text-2xl text-center mb-4 border-b border-gray-400">
+                Book Information
+              </div>
               <div className="space-x-2 flex justify-between">
                 <label htmlFor="title">Title:</label>
                 <input
@@ -122,7 +125,7 @@ const BookForm: React.FC<BookFormProps> = ({
             </form>
             <button
               type="submit"
-              className="py-1 px-3 bg-purple-500 text-white rounded-full hover:bg-purple-300"
+              className="py-1 px-3 w-full text-center mt-4 bg-purple-500 text-white rounded-full hover:bg-purple-400"
             >
               Submit Book
             </button>
