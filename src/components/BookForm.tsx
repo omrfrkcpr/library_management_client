@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { IoMdClose } from "react-icons/io";
 
 type BookFormProps = {
@@ -24,6 +30,7 @@ const BookForm: React.FC<BookFormProps> = ({
   initialFormState,
 }) => {
   const [isVisible, setIsVisible] = useState(showForm);
+  const formDiv = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (showForm) {
@@ -31,26 +38,49 @@ const BookForm: React.FC<BookFormProps> = ({
     } else {
       const timer = setTimeout(() => {
         setIsVisible(false);
-      }, 200); // 200ms = fade-out duration
+      }, 200);
       return () => clearTimeout(timer);
     }
   }, [showForm]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (formDiv.current && !formDiv.current.contains(event.target as Node)) {
+        setShowForm(false);
+        setForm(initialFormState);
+        setEditMode(false);
+      }
+    };
+
+    if (showForm) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showForm, setShowForm, setForm, setEditMode, initialFormState]);
+
+  const handleFormClose = () => {
+    setForm(initialFormState);
+    setShowForm(false);
+    setEditMode(false);
+  };
 
   return (
     <>
       {isVisible && (
         <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
+            ref={formDiv}
             className={`w-[90%] max-w-[400px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
               showForm ? "opacity-100" : "opacity-0"
             }`}
           >
             <IoMdClose
-              onClick={() => {
-                setForm(initialFormState);
-                setShowForm(false);
-                setEditMode(false);
-              }}
+              onClick={handleFormClose}
               className="absolute top-2 right-2 w-5 h-5 hover:text-gray-500 cursor-pointer"
             />
             <form
