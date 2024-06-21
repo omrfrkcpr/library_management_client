@@ -27,4 +27,6 @@ interface Book extends Form {
 
 interface BookListProps {
   books: Book[];
+  handleDelete: (id: string) => void;
+  handleEdit: ({ id, oldBook }: { id: string; oldBook: Form }) => void;
 }

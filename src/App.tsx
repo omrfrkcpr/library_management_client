@@ -32,19 +32,74 @@ function App() {
     setBooks(response.data.books);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async ({
+    e,
+    id,
+  }: {
+    e: React.FormEvent<HTMLFormElement>;
+    id: string;
+  }) => {
     e.preventDefault();
     console.log(form);
+    if (id) {
+      try {
+        await axios.put(
+          `${import.meta.env.VITE_SERVER_HOST}:${
+            import.meta.env.VITE_SERVER_PORT
+          }/books/${id}`,
+          form
+        );
+        Swal.fire({
+          title: "Success!",
+          text: "Book is successfully updated!",
+          icon: "success",
+        });
+        getBooksData();
+      } catch (error: any) {
+        console.log(error);
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      }
+    } else if (!id) {
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_SERVER_HOST}:${
+            import.meta.env.VITE_SERVER_PORT
+          }/books`,
+          form
+        );
+        Swal.fire({
+          title: "Success!",
+          text: "New Book is successfully added!",
+          icon: "success",
+        });
+        getBooksData();
+      } catch (error: any) {
+        console.log(error);
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      }
+    }
+    setForm(initialFormState);
+    setShowForm(false);
+  };
+
+  const handleDelete = async (id: string) => {
     try {
-      await axios.post(
+      await axios.delete(
         `${import.meta.env.VITE_SERVER_HOST}:${
           import.meta.env.VITE_SERVER_PORT
-        }/books`,
-        form
+        }/books/${id}`
       );
       Swal.fire({
         title: "Success!",
-        text: "New Book is successfully added!",
+        text: "Book is successfully deleted!",
         icon: "success",
       });
       getBooksData();
@@ -55,10 +110,12 @@ function App() {
         text: error.response.data.message,
         icon: "error",
       });
-    } finally {
-      setForm(initialFormState);
-      setShowForm(false);
     }
+  };
+
+  const handleEdit = (id: string, oldBook: Book) => {
+    setForm(oldBook);
+    setShowForm(true);
   };
 
   useEffect(() => {
@@ -76,7 +133,11 @@ function App() {
       />
       <Navbar setShowForm={setShowForm} />
       <div className="">
-        <BookList books={books} />
+        <BookList
+          books={books}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+        />
       </div>
     </div>
   );

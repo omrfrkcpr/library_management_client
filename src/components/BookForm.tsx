@@ -5,7 +5,13 @@ import { IoMdClose } from "react-icons/io";
 type BookFormProps = {
   form: Form;
   setForm: Dispatch<SetStateAction<Form>>;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: ({
+    e,
+    bookInfo,
+  }: {
+    e: React.FormEvent<HTMLFormElement>;
+    bookInfo: Book;
+  }) => void;
   showForm: boolean;
   setShowForm: Dispatch<SetStateAction<boolean>>;
 };
@@ -29,6 +35,12 @@ const BookForm: React.FC<BookFormProps> = ({
       return () => clearTimeout(timer);
     }
   }, [showForm]);
+
+  const isFormEmpty = () => {
+    return Object.values(form).every(
+      (value) => value === "" || value === 0 || value === undefined
+    );
+  };
 
   return (
     <>
@@ -168,7 +180,7 @@ const BookForm: React.FC<BookFormProps> = ({
               onKeyDown={(e: any) => e.key === "Enter" && handleSubmit(e)}
               className="md:py-1 px-3 w-full text-center mt-4 bg-purple-500 text-white rounded-full hover:bg-purple-400"
             >
-              Submit New Book
+              {isFormEmpty() ? "Submit New Book" : "Update Book"}
             </button>
           </div>
         </div>
