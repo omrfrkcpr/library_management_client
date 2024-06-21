@@ -4,6 +4,7 @@ import axios from "axios";
 import BookList from "./components/BookList";
 import BookForm from "./components/BookForm";
 import Navbar from "./components/Navbar";
+import Swal from "sweetalert2";
 
 const initialFormState = {
   title: "",
@@ -34,8 +35,6 @@ function App() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(form);
-    setForm(initialFormState);
-
     try {
       await axios.post(
         `${import.meta.env.VITE_SERVER_HOST}:${
@@ -43,9 +42,22 @@ function App() {
         }/books`,
         form
       );
+      Swal.fire({
+        title: "Success!",
+        text: "New Book is successfully added!",
+        icon: "success",
+      });
       getBooksData();
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response.data.message,
+        icon: "error",
+      });
+    } finally {
+      setForm(initialFormState);
+      setShowForm(false);
     }
   };
 

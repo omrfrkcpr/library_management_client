@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
@@ -42,10 +43,7 @@ const BookForm: React.FC<BookFormProps> = ({
               onClick={() => setShowForm(false)}
               className="absolute top-2 right-2 w-5 h-5 hover:text-gray-500 cursor-pointer"
             />
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col space-y-2 mb-4"
-            >
+            <form className="flex flex-col space-y-2 mb-4">
               <div className="text-2xl text-center mb-4 border-b border-gray-400">
                 Book Information
               </div>
@@ -166,7 +164,8 @@ const BookForm: React.FC<BookFormProps> = ({
               </div>
             </form>
             <button
-              type="submit"
+              onClick={(e: any) => handleSubmit(e)}
+              onKeyDown={(e: any) => e.key === "Enter" && handleSubmit(e)}
               className="md:py-1 px-3 w-full text-center mt-4 bg-purple-500 text-white rounded-full hover:bg-purple-400"
             >
               Submit New Book
