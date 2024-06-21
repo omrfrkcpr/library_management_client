@@ -3,11 +3,17 @@ import { truncateText } from "../helpers/functions";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
 
-const BookCard: React.FC<{
+type BookCardProps = {
   book: Book;
   handleDelete: (id: string) => void;
-  handleEdit: ({ id, oldBook }: { id: string; oldBook: Form }) => void;
-}> = ({ book, handleDelete, handleEdit }) => {
+  handleEdit: (book: Book) => void;
+};
+
+const BookCard: React.FC<BookCardProps> = ({
+  book,
+  handleDelete,
+  handleEdit,
+}) => {
   const {
     id,
     title,
@@ -43,7 +49,7 @@ const BookCard: React.FC<{
               target="_blank"
               className="text-blue-400 hover:underline text-[10px] lg:text-sm"
             >
-              More
+              ...more
             </a>
           </p>
         </div>
@@ -59,8 +65,14 @@ const BookCard: React.FC<{
           <div className="flex justify-between">
             <span className="text-[12px] md:text-md mt-2">ISBN: {isbn}</span>
             <div className="flex items-center justify-center gap-1">
-              <RiDeleteBin6Fill onClick={() => handleDelete(id)} />
-              <FaEdit onClick={() => handleEdit({ id, oldBook: book })} />
+              <RiDeleteBin6Fill
+                onClick={() => handleDelete(id)}
+                className="cursor-pointer text-red-500 hover:scale-125 hover:text-red-300"
+              />
+              <FaEdit
+                onClick={() => handleEdit(book)}
+                className="cursor-pointer text-orange-400 hover:scale-125 hover:text-orange-300"
+              />
             </div>
           </div>
         </div>

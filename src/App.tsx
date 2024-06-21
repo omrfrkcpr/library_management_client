@@ -21,6 +21,8 @@ function App() {
   const [form, setForm] = useState<Form>(initialFormState);
   const [books, setBooks] = useState<Book[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editBookId, setEditBookId] = useState<string>("");
 
   const getBooksData = async () => {
     const response = await axios.get(
@@ -28,42 +30,49 @@ function App() {
         import.meta.env.VITE_SERVER_PORT
       }/books`
     );
-    // console.log(response.data.books);
     setBooks(response.data.books);
   };
 
-  const handleSubmit = async ({
-    e,
-    id,
-  }: {
-    e: React.FormEvent<HTMLFormElement>;
-    id: string;
-  }) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
-    if (id) {
-      try {
-        await axios.put(
-          `${import.meta.env.VITE_SERVER_HOST}:${
-            import.meta.env.VITE_SERVER_PORT
-          }/books/${id}`,
-          form
-        );
-        Swal.fire({
-          title: "Success!",
-          text: "Book is successfully updated!",
-          icon: "success",
-        });
-        getBooksData();
-      } catch (error: any) {
-        console.log(error);
-        Swal.fire({
-          title: "Error!",
-          text: error.response.data.message,
-          icon: "error",
-        });
+    if (editMode) {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Book Informations will be permanently updated",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#FDBA74",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, update it!",
+      });
+
+      if (result.isConfirmed) {
+        try {
+          await axios.put(
+            `${import.meta.env.VITE_SERVER_HOST}:${
+              import.meta.env.VITE_SERVER_PORT
+            }/books/${editBookId}`,
+            form
+          );
+          Swal.fire({
+            title: "Success!",
+            text: "Book is successfully updated!",
+            icon: "success",
+          });
+          setEditMode(false);
+          setShowForm(false);
+          setForm(initialFormState);
+          getBooksData();
+        } catch (error: any) {
+          console.log(error);
+          Swal.fire({
+            title: "Error!",
+            text: error.response.data.message,
+            icon: "error",
+          });
+        }
       }
-    } else if (!id) {
+    } else {
       try {
         await axios.post(
           `${import.meta.env.VITE_SERVER_HOST}:${
@@ -77,6 +86,8 @@ function App() {
           icon: "success",
         });
         getBooksData();
+        setForm(initialFormState);
+        setShowForm(false);
       } catch (error: any) {
         console.log(error);
         Swal.fire({
@@ -86,35 +97,47 @@ function App() {
         });
       }
     }
-    setForm(initialFormState);
-    setShowForm(false);
   };
 
   const handleDelete = async (id: string) => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_SERVER_HOST}:${
-          import.meta.env.VITE_SERVER_PORT
-        }/books/${id}`
-      );
-      Swal.fire({
-        title: "Success!",
-        text: "Book is successfully deleted!",
-        icon: "success",
-      });
-      getBooksData();
-    } catch (error: any) {
-      console.log(error);
-      Swal.fire({
-        title: "Error!",
-        text: error.response.data.message,
-        icon: "error",
-      });
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This book will be permanently deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#37901e",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(
+          `${import.meta.env.VITE_SERVER_HOST}:${
+            import.meta.env.VITE_SERVER_PORT
+          }/books/${id}`
+        );
+        Swal.fire({
+          title: "Deleted!",
+          text: "Book has been successfully deleted.",
+          icon: "success",
+        });
+        getBooksData();
+      } catch (error: any) {
+        console.log(error);
+        Swal.fire({
+          title: "Error!",
+          text: error.response.data.message,
+          icon: "error",
+        });
+      }
     }
   };
 
-  const handleEdit = (id: string, oldBook: Book) => {
+  const handleEdit = (oldBook: Book) => {
     setForm(oldBook);
+    setEditMode(true);
+    setEditBookId(oldBook.id);
     setShowForm(true);
   };
 
@@ -130,15 +153,17 @@ function App() {
         setForm={setForm}
         showForm={showForm}
         setShowForm={setShowForm}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        initialFormState={initialFormState}
       />
       <Navbar setShowForm={setShowForm} />
-      <div className="">
-        <BookList
-          books={books}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-        />
-      </div>
+
+      <BookList
+        books={books}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+      />
     </div>
   );
 }

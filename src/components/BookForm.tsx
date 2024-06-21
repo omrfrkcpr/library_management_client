@@ -5,15 +5,12 @@ import { IoMdClose } from "react-icons/io";
 type BookFormProps = {
   form: Form;
   setForm: Dispatch<SetStateAction<Form>>;
-  handleSubmit: ({
-    e,
-    bookInfo,
-  }: {
-    e: React.FormEvent<HTMLFormElement>;
-    bookInfo: Book;
-  }) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   showForm: boolean;
   setShowForm: Dispatch<SetStateAction<boolean>>;
+  editMode: boolean;
+  setEditMode: Dispatch<SetStateAction<boolean>>;
+  initialFormState: Form;
 };
 
 const BookForm: React.FC<BookFormProps> = ({
@@ -22,6 +19,9 @@ const BookForm: React.FC<BookFormProps> = ({
   handleSubmit,
   showForm,
   setShowForm,
+  editMode,
+  setEditMode,
+  initialFormState,
 }) => {
   const [isVisible, setIsVisible] = useState(showForm);
 
@@ -31,16 +31,10 @@ const BookForm: React.FC<BookFormProps> = ({
     } else {
       const timer = setTimeout(() => {
         setIsVisible(false);
-      }, 200); // 500ms = fade-out duration
+      }, 200); // 200ms = fade-out duration
       return () => clearTimeout(timer);
     }
   }, [showForm]);
-
-  const isFormEmpty = () => {
-    return Object.values(form).every(
-      (value) => value === "" || value === 0 || value === undefined
-    );
-  };
 
   return (
     <>
@@ -52,10 +46,17 @@ const BookForm: React.FC<BookFormProps> = ({
             }`}
           >
             <IoMdClose
-              onClick={() => setShowForm(false)}
+              onClick={() => {
+                setForm(initialFormState);
+                setShowForm(false);
+                setEditMode(false);
+              }}
               className="absolute top-2 right-2 w-5 h-5 hover:text-gray-500 cursor-pointer"
             />
-            <form className="flex flex-col space-y-2 mb-4">
+            <form
+              className="flex flex-col space-y-2 mb-4"
+              onSubmit={handleSubmit}
+            >
               <div className="text-2xl text-center mb-4 border-b border-gray-400">
                 Book Information
               </div>
@@ -135,14 +136,9 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="publicationYear"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="publicationYear"
-                  value={
-                    form?.publicationYear === 0 ? "" : form?.publicationYear
-                  }
+                  value={form.publicationYear === 0 ? "" : form.publicationYear}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
-                      publicationYear: parseInt(e.target.value, 10),
-                    })
+                    setForm({ ...form, publicationYear: +e.target.value })
                   }
                 />
               </div>
@@ -161,7 +157,7 @@ const BookForm: React.FC<BookFormProps> = ({
               </div>
               <div className="space-x-2 flex justify-between">
                 <label className="text-sm md:text-md" htmlFor="detailUrl">
-                  Detail Info URL:
+                  Detail URL:
                 </label>
                 <input
                   type="text"
@@ -174,14 +170,19 @@ const BookForm: React.FC<BookFormProps> = ({
                   }
                 />
               </div>
+              <div className="text-center">
+                <button
+                  className={`py-1 px-3 w-[130px] mt-5 rounded-xl text-white transition-all ${
+                    editMode
+                      ? "bg-orange-400 hover:bg-orange-300"
+                      : "bg-green-600 hover:bg-green-300"
+                  }`}
+                  type="submit"
+                >
+                  {editMode ? "Update Book" : "Add Book"}
+                </button>
+              </div>
             </form>
-            <button
-              onClick={(e: any) => handleSubmit(e)}
-              onKeyDown={(e: any) => e.key === "Enter" && handleSubmit(e)}
-              className="md:py-1 px-3 w-full text-center mt-4 bg-purple-500 text-white rounded-full hover:bg-purple-400"
-            >
-              {isFormEmpty() ? "Submit New Book" : "Update Book"}
-            </button>
           </div>
         </div>
       )}

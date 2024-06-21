@@ -2,6 +2,12 @@
 import React from "react";
 import BookCard from "./BookCard";
 
+type BookListProps = {
+  books: Book[];
+  handleDelete: (id: string) => void;
+  handleEdit: (book: Book) => void;
+};
+
 const BookList: React.FC<BookListProps> = ({
   books,
   handleDelete,
