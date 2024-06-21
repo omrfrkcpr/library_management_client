@@ -34,7 +34,7 @@ const BookForm: React.FC<BookFormProps> = ({
       {isVisible && (
         <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
-            className={`w-[85%] max-w-[400px] h-auto p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
+            className={`w-[90%] max-w-[400px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
               showForm ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -50,55 +50,80 @@ const BookForm: React.FC<BookFormProps> = ({
                 Book Information
               </div>
               <div className="space-x-2 flex justify-between">
-                <label htmlFor="title">Title:</label>
+                <label className="text-sm md:text-md" htmlFor="title">
+                  Title:
+                </label>
                 <input
                   type="text"
                   id="title"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm py-1"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="title"
                   value={form.title}
                   onChange={(e) => setForm({ ...form, title: e.target.value })}
                 />
               </div>
               <div className="space-x-2 flex justify-between">
-                <label htmlFor="author">Author:</label>
+                <label className="text-sm md:text-md" htmlFor="author">
+                  Author:
+                </label>
                 <input
                   type="text"
                   id="author"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm py-1"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="author"
                   value={form.author}
                   onChange={(e) => setForm({ ...form, author: e.target.value })}
                 />
               </div>
               <div className="space-x-2 flex justify-between">
-                <label htmlFor="isbn">ISBN:</label>
+                <label className="text-sm md:text-md" htmlFor="description">
+                  Description:
+                </label>
+                <input
+                  type="text"
+                  id="description"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
+                  name="description"
+                  value={form.description}
+                  onChange={(e) =>
+                    setForm({ ...form, description: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-x-2 flex justify-between">
+                <label className="text-sm md:text-md" htmlFor="isbn">
+                  ISBN:
+                </label>
                 <input
                   type="text"
                   id="isbn"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm py-1"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="isbn"
                   value={form?.isbn}
                   onChange={(e) => setForm({ ...form, isbn: e.target.value })}
                 />
               </div>
               <div className="space-x-2 flex justify-between">
-                <label htmlFor="genre">Genre:</label>
+                <label className="text-sm md:text-md" htmlFor="genre">
+                  Genre:
+                </label>
                 <input
                   type="text"
                   id="genre"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm py-1"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="genre"
                   value={form?.genre}
                   onChange={(e) => setForm({ ...form, genre: e.target.value })}
                 />
               </div>
               <div className="space-x-2 flex justify-between">
-                <label htmlFor="publicationYear">Publication Year:</label>
+                <label className="text-sm md:text-md" htmlFor="publicationYear">
+                  Publication Year:
+                </label>
                 <input
                   type="number"
                   id="publicationYear"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm py-1"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="publicationYear"
                   value={
                     form?.publicationYear === 0 ? "" : form?.publicationYear
@@ -112,22 +137,39 @@ const BookForm: React.FC<BookFormProps> = ({
                 />
               </div>
               <div className="space-x-2 flex justify-between">
-                <label htmlFor="image">Image:</label>
+                <label className="text-sm md:text-md" htmlFor="image">
+                  Image URL:
+                </label>
                 <input
                   type="text"
                   id="image"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm py-1"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="image"
                   value={form.image}
                   onChange={(e) => setForm({ ...form, image: e.target.value })}
                 />
               </div>
+              <div className="space-x-2 flex justify-between">
+                <label className="text-sm md:text-md" htmlFor="detailUrl">
+                  Detail Info URL:
+                </label>
+                <input
+                  type="text"
+                  id="detailUrl"
+                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
+                  name="detailUrl"
+                  value={form.detailUrl}
+                  onChange={(e) =>
+                    setForm({ ...form, detailUrl: e.target.value })
+                  }
+                />
+              </div>
             </form>
             <button
               type="submit"
-              className="py-1 px-3 w-full text-center mt-4 bg-purple-500 text-white rounded-full hover:bg-purple-400"
+              className="md:py-1 px-3 w-full text-center mt-4 bg-purple-500 text-white rounded-full hover:bg-purple-400"
             >
-              Submit Book
+              Submit New Book
             </button>
           </div>
         </div>
