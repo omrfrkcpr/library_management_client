@@ -9,7 +9,7 @@ const formFields = [
   { id: "description", label: "Description", type: "text" },
   { id: "isbn", label: "ISBN", type: "text" },
   { id: "genre", label: "Genre", type: "text" },
-  { id: "publicationYear", label: "Publication Year", type: "number" },
+  { id: "publicationYear", label: "First Publication Year", type: "number" },
   { id: "image", label: "Image URL", type: "text" },
   { id: "detailUrl", label: "Detail URL", type: "text" },
 ];
@@ -75,7 +75,7 @@ const BookForm = () => {
         <input
           type={field?.type}
           id={field?.id}
-          className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
+          className="outline-none border border-gray-500 rounded-md px-3 text-sm md:py-1"
           name={field.id}
           value={form?.[field?.id] || ""}
           required
@@ -96,7 +96,7 @@ const BookForm = () => {
         <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
             ref={formDiv}
-            className={`w-[90%] max-w-[400px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
+            className={`w-[96%] max-w-[400px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
               showForm ? "opacity-100" : "opacity-0"
             }`}
           >
