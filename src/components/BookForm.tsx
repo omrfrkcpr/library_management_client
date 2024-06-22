@@ -2,6 +2,7 @@
 import React from "react";
 import { IoMdClose } from "react-icons/io";
 import { BookContext } from "../context/BookContext";
+import spinner from "../assets/loading-spinner.gif";
 
 const formFields = [
   { id: "title", label: "Title", type: "text" },
@@ -24,6 +25,7 @@ const BookForm = () => {
     editMode,
     setEditMode,
     initialFormState,
+    loading,
   } = React.useContext(BookContext) as BookContextType;
 
   const [isVisible, setIsVisible] = React.useState(showForm);
@@ -117,14 +119,30 @@ const BookForm = () => {
               {renderFormFields()}
               <div className="text-center">
                 <button
-                  className={`py-1 px-3 w-[130px] mt-5 rounded-xl text-white transition-all ${
+                  disabled={!loading}
+                  className={`${
+                    loading ? "py-0" : "py-1"
+                  } px-3 w-[130px] mt-5 rounded-xl text-white transition-all cursor-pointer ${
                     editMode
                       ? "bg-orange-400 hover:bg-orange-300"
                       : "bg-green-600 hover:bg-green-300"
                   }`}
                   type="submit"
                 >
-                  {editMode ? "Update Book" : "Add Book"}
+                  {loading ? (
+                    <span className="flex justify-center items-center">
+                      <span>Loading...</span>
+                      <img
+                        src={spinner}
+                        alt="loading-spinner"
+                        className="mx-auto w-[24px] h-[24px] text-center"
+                      />
+                    </span>
+                  ) : editMode ? (
+                    "Update Book"
+                  ) : (
+                    "Add Book"
+                  )}
                 </button>
               </div>
             </form>

@@ -22,18 +22,31 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [form, setForm] = useState<Form>(initialFormState);
+  const [loading, setLoading] = useState<boolean>(false);
   const [books, setBooks] = useState<Book[]>([]);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editBookId, setEditBookId] = useState<string>("");
 
   const getBooksData = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_SERVER_HOST}:${
-        import.meta.env.VITE_SERVER_PORT
-      }/books`
-    );
-    setBooks(response.data.books);
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_HOST}:${
+          import.meta.env.VITE_SERVER_PORT
+        }/books`
+      );
+      setBooks(response.data.books);
+    } catch (error: any) {
+      console.log(error);
+      Swal.fire({
+        title: "Error!",
+        text: error.response.data.message,
+        icon: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,6 +63,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
       });
 
       if (result.isConfirmed) {
+        setLoading(true);
         try {
           await axios.put(
             `${import.meta.env.VITE_SERVER_HOST}:${
@@ -73,9 +87,12 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
             text: error.response.data.message,
             icon: "error",
           });
+        } finally {
+          setLoading(false);
         }
       }
     } else {
+      setLoading(true);
       try {
         await axios.post(
           `${import.meta.env.VITE_SERVER_HOST}:${
@@ -98,6 +115,8 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
           text: error.response.data.message,
           icon: "error",
         });
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -114,6 +133,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
     });
 
     if (result.isConfirmed) {
+      setLoading(true);
       try {
         await axios.delete(
           `${import.meta.env.VITE_SERVER_HOST}:${
@@ -133,6 +153,8 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
           text: error.response.data.message,
           icon: "error",
         });
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -161,6 +183,8 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
     editMode,
     setEditMode,
     initialFormState,
+    loading,
+    setLoading,
   };
 
   return (

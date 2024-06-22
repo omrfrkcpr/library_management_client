@@ -2,17 +2,22 @@
 import React from "react";
 import BookCard from "./BookCard";
 import { BookContext } from "../context/BookContext";
+import Loading from "./Loading";
 
 const BookList = () => {
-  const { books } = React.useContext(BookContext) as BookContextType;
+  const { books, loading } = React.useContext(BookContext) as BookContextType;
 
-  console.log(books);
+  // console.log(books);
+
   return (
     <div className="flex flex-wrap p-8 mx-auto gap-10 lg:gap-16 justify-center">
-      {books &&
+      {loading ? (
+        <Loading />
+      ) : (
         books.map((book: Book) => {
           return <BookCard key={book?.id} book={book} />;
-        })}
+        })
+      )}
     </div>
   );
 };

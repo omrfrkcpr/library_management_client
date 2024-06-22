@@ -1,10 +1,13 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { BookProvider } from "./context/BookContext";
-import AppRouter from "./router/AppRouter";
+import routes from "./router/routes";
+
+const router = createBrowserRouter(routes);
 
 function App() {
   return (
     <BookProvider>
-      <AppRouter />
+      <RouterProvider router={router} />
     </BookProvider>
   );
 }

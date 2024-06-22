@@ -13,3 +13,8 @@ export const getTruncateLength = (width: number) => {
   if (width >= 768) return 35; // md
   return 32; // default
 };
+
+export function extractBookId(url: string) {
+  const match = url.match(/book\/(\d+)$/);
+  return match ? parseInt(match[1], 10) : null;
+}

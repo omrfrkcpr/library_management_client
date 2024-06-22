@@ -39,6 +39,8 @@ interface BookContextType {
   editMode: boolean;
   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   initialFormState: Form;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface BookListProps {
