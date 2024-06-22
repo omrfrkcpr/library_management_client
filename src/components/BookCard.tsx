@@ -2,18 +2,13 @@ import React from "react";
 import { truncateText } from "../helpers/functions";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaEdit } from "react-icons/fa";
+import { BookContext } from "../context/BookContext";
 
-type BookCardProps = {
-  book: Book;
-  handleDelete: (id: string) => void;
-  handleEdit: (book: Book) => void;
-};
+const BookCard = ({ book }: { book: Book }) => {
+  const { handleEdit, handleDelete } = React.useContext(
+    BookContext
+  ) as BookContextType;
 
-const BookCard: React.FC<BookCardProps> = ({
-  book,
-  handleDelete,
-  handleEdit,
-}) => {
   const {
     id,
     title,
@@ -25,8 +20,9 @@ const BookCard: React.FC<BookCardProps> = ({
     isbn,
     detailUrl,
   } = book;
+
   return (
-    <div className="flex w-[340px] lg:w-[500px] h-[220px] lg:h-[300px] overflow-hidden shadow-lg relative rounded-xl">
+    <div className="flex w-[340px] lg:w-[600px] h-[220px] lg:h-[300px] overflow-hidden shadow-lg relative rounded-xl">
       <div>
         <img
           className="w-[200px] lg:w-[330px] h-[240px] object-fit lg:object-cover lg:h-auto"
@@ -53,7 +49,7 @@ const BookCard: React.FC<BookCardProps> = ({
             </a>
           </p>
         </div>
-        <div className="flex flex-col border-t-[1px] border-gray-300 pt-2 absolute bottom-0 w-[280px] pb-2">
+        <div className="flex flex-col border-t-[1px] border-gray-300 pt-2 absolute bottom-0 w-[185px] lg:w-[365px] pb-2">
           <div className="flex justify-between">
             <span className="flex items-center w-[fit-content] max-w-[150px] overflow-auto justify-start bg-gray-200 rounded-full px-1 md:px-3 py-1 text-[10px] md:text-md lg:text-[14px] font-semibold text-gray-700">
               #{genre}
@@ -62,8 +58,10 @@ const BookCard: React.FC<BookCardProps> = ({
               Publication: {publicationYear}
             </span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-[12px] md:text-md mt-2">ISBN: {isbn}</span>
+          <div className="flex justify-between md:px-2">
+            <span className="text-[10px] md:text-md lg:text-[14px] mt-2">
+              ISBN: {isbn}
+            </span>
             <div className="flex items-center justify-center gap-1">
               <RiDeleteBin6Fill
                 onClick={() => handleDelete(id)}

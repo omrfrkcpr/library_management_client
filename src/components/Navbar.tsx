@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Dispatch, SetStateAction } from "react";
+import { useContext } from "react";
 import { FaBookReader } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
+import { BookContext } from "../context/BookContext";
 
-export default function Navbar({
-  setShowForm,
-}: {
-  setShowForm: Dispatch<SetStateAction<boolean>>;
-}) {
+export default function Navbar() {
+  const { setShowForm } = useContext(BookContext) as BookContextType;
+
   return (
     <div className="mx-auto top-0 sticky px-2 sm:px-6 lg:px-8 bg-purple-100 z-10">
       <div className="flex h-16 items-center justify-between">

@@ -25,6 +25,21 @@ interface Book extends Form {
   updatedAt: string;
 }
 
+interface BookContextType {
+  form: Form;
+  setForm: React.Dispatch<React.SetStateAction<Form>>;
+  books: Book[];
+  getBooksData: () => Promise<void>;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  handleDelete: (id: string) => Promise<void>;
+  handleEdit: (oldBook: Book) => void;
+  showForm: boolean;
+  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  editMode: boolean;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  initialFormState: Form;
+}
+
 interface BookListProps {
   books: Book[];
   handleDelete: (id: string) => void;

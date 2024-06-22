@@ -1,38 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React from "react";
 import { IoMdClose } from "react-icons/io";
+import { BookContext } from "../context/BookContext";
 
-type BookFormProps = {
-  form: Form;
-  setForm: Dispatch<SetStateAction<Form>>;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  showForm: boolean;
-  setShowForm: Dispatch<SetStateAction<boolean>>;
-  editMode: boolean;
-  setEditMode: Dispatch<SetStateAction<boolean>>;
-  initialFormState: Form;
-};
+const BookForm = () => {
+  const {
+    form,
+    setForm,
+    handleSubmit,
+    showForm,
+    setShowForm,
+    editMode,
+    setEditMode,
+    initialFormState,
+  } = React.useContext(BookContext) as BookContextType;
 
-const BookForm: React.FC<BookFormProps> = ({
-  form,
-  setForm,
-  handleSubmit,
-  showForm,
-  setShowForm,
-  editMode,
-  setEditMode,
-  initialFormState,
-}) => {
-  const [isVisible, setIsVisible] = useState(showForm);
-  const formDiv = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(showForm);
+  const formDiv = React.useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (showForm) {
       setIsVisible(true);
     } else {
@@ -43,7 +29,7 @@ const BookForm: React.FC<BookFormProps> = ({
     }
   }, [showForm]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (formDiv.current && !formDiv.current.contains(event.target as Node)) {
         setShowForm(false);
@@ -99,7 +85,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="title"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="title"
-                  value={form.title}
+                  value={form?.title || ""}
                   onChange={(e) => setForm({ ...form, title: e.target.value })}
                 />
               </div>
@@ -112,7 +98,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="author"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="author"
-                  value={form.author}
+                  value={form?.author || ""}
                   onChange={(e) => setForm({ ...form, author: e.target.value })}
                 />
               </div>
@@ -125,7 +111,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="description"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="description"
-                  value={form.description}
+                  value={form?.description || ""}
                   onChange={(e) =>
                     setForm({ ...form, description: e.target.value })
                   }
@@ -140,7 +126,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="isbn"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="isbn"
-                  value={form?.isbn}
+                  value={form?.isbn || ""}
                   onChange={(e) => setForm({ ...form, isbn: e.target.value })}
                 />
               </div>
@@ -153,7 +139,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="genre"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="genre"
-                  value={form?.genre}
+                  value={form?.genre || ""}
                   onChange={(e) => setForm({ ...form, genre: e.target.value })}
                 />
               </div>
@@ -166,7 +152,11 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="publicationYear"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="publicationYear"
-                  value={form.publicationYear === 0 ? "" : form.publicationYear}
+                  value={
+                    (form?.publicationYear === 0
+                      ? ""
+                      : form?.publicationYear) || ""
+                  }
                   onChange={(e) =>
                     setForm({ ...form, publicationYear: +e.target.value })
                   }
@@ -181,7 +171,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="image"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="image"
-                  value={form.image}
+                  value={form?.image || ""}
                   onChange={(e) => setForm({ ...form, image: e.target.value })}
                 />
               </div>
@@ -194,7 +184,7 @@ const BookForm: React.FC<BookFormProps> = ({
                   id="detailUrl"
                   className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
                   name="detailUrl"
-                  value={form.detailUrl}
+                  value={form?.detailUrl || ""}
                   onChange={(e) =>
                     setForm({ ...form, detailUrl: e.target.value })
                   }

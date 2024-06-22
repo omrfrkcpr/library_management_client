@@ -1,31 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import BookCard from "./BookCard";
+import { BookContext } from "../context/BookContext";
 
-type BookListProps = {
-  books: Book[];
-  handleDelete: (id: string) => void;
-  handleEdit: (book: Book) => void;
-};
+const BookList = () => {
+  const { books } = React.useContext(BookContext) as BookContextType;
 
-const BookList: React.FC<BookListProps> = ({
-  books,
-  handleDelete,
-  handleEdit,
-}) => {
   console.log(books);
   return (
-    <div className="flex flex-wrap p-8 mx-auto gap-10 justify-center">
+    <div className="flex flex-wrap p-8 mx-auto gap-10 lg:gap-16 justify-center">
       {books &&
         books.map((book: Book) => {
-          return (
-            <BookCard
-              key={book?.id}
-              book={book}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-            />
-          );
+          return <BookCard key={book?.id} book={book} />;
         })}
     </div>
   );
