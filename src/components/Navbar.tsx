@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FaBookReader } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { BookContext } from "../context/BookContext";
+import { CiSearch } from "react-icons/ci";
 
 export default function Navbar() {
   const { setShowForm } = useContext(BookContext) as BookContextType;
@@ -18,7 +19,10 @@ export default function Navbar() {
             </h1>
           </div>
         </div>
-        <div className="absolute inset-y-2 right-2 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div className="absolute inset-y-2 right-2 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-2">
+          <button>
+            <CiSearch className="w-5 h-5 md:w-8 md:h-8 hover:text-gray-400 duration-300" />
+          </button>
           <button
             onClick={() => setShowForm(true)}
             className="bg-purple-500 text-white hover:text-purple-500 font-bold hover:bg-gray-100 border border-purple-500 rounded-full duration-300"
