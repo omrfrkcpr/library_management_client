@@ -69,13 +69,16 @@ const BookForm = () => {
   const renderFormFields = () =>
     formFields.map((field) => (
       <div className="space-x-2 flex justify-between" key={field?.id}>
-        <label className="text-sm md:text-md" htmlFor={field?.id}>
+        <label
+          className="text-sm md:text-md w-[250px] md:w-[190px]"
+          htmlFor={field?.id}
+        >
           {field?.label}:
         </label>
         <input
           type={field?.type}
           id={field?.id}
-          className="outline-none border border-gray-500 rounded-md px-3 text-sm md:py-1"
+          className="outline-none border border-gray-500 rounded-md px-3 text-sm md:py-1 w-[100%]"
           name={field.id}
           value={form?.[field?.id] || ""}
           required
@@ -96,7 +99,7 @@ const BookForm = () => {
         <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
             ref={formDiv}
-            className={`w-[96%] max-w-[400px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
+            className={`w-[96%] max-w-[600px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
               showForm ? "opacity-100" : "opacity-0"
             }`}
           >

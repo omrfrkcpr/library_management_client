@@ -31,7 +31,7 @@ const BookCard = ({ book }: { book: Book }) => {
   } = book;
 
   return (
-    <div className="flex w-[360px] md:w-[380px] lg:w-[600px] h-[240px] md:h-[280px] lg:h-[300px] overflow-hidden shadow-lg relative rounded-xl">
+    <div className="flex w-[360px] md:w-[380px] lg:w-[600px] h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden shadow-lg relative rounded-xl">
       <img
         className="w-[130px] md:w-[150px] lg:w-[180px] object-fit lg:h-[300px]"
         src={image || noImage}
@@ -62,8 +62,9 @@ const BookCard = ({ book }: { book: Book }) => {
             <span className="flex items-center w-[fit-content] max-w-[150px] overflow-auto justify-start bg-gray-200 rounded-full px-1 md:px-3 py-1 text-[10px] md:text-md lg:text-[14px] font-semibold text-gray-700">
               #{genre}
             </span>
-            <span className="flex items-center w-[fit-content] overflow-auto justify-start rounded-full px-1 md:px-3 py-1 text-[10px] md:text-md lg:text-[14px] text-gray-700">
-              First Publication: {publicationYear}
+            <span className="flex items-center w-[fit-content] overflow-auto justify-start rounded-full px-1 md:px-3 py-1 text-[10px] md:text-md lg:text-[14px] text-gray-700 gap-1">
+              First Publication:{" "}
+              <span className="font-semibold">{publicationYear}</span>
             </span>
           </div>
           <div className="flex justify-between items-center md:px-2">

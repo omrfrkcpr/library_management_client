@@ -1,15 +1,14 @@
-import BookList from "./components/BookList";
-import BookForm from "./components/BookForm";
-import Navbar from "./components/Navbar";
 import { BookProvider } from "./context/BookContext";
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
 
 function App() {
   return (
-    <BookProvider>
-      <BookForm />
-      <Navbar />
-      <BookList />
-    </BookProvider>
+    <Router>
+      <BookProvider>
+        <AppRouter />
+      </BookProvider>
+    </Router>
   );
 }
 

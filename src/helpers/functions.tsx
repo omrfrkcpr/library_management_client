@@ -11,5 +11,5 @@ export function truncateText(text: string, length: number) {
 export const getTruncateLength = (width: number) => {
   if (width >= 1024) return 45; // lg
   if (width >= 768) return 35; // md
-  return 40; // default
+  return 32; // default
 };
