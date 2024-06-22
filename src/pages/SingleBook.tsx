@@ -1,22 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { extractBookId } from "../helpers/functions";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
+import SingleBookCard from "../components/SingleBookCard";
+import BookForm from "../components/BookForm";
+import { BookContext } from "../context/BookContext";
 
 const SingleBook = () => {
   const { pathname } = useLocation();
-  const [singleBook, setSingleBook] = useState<Book | null>(null);
+  const { books } = useContext(BookContext) as BookContextType;
+  const [singleBook, setSingleBook] = useState<Book | undefined>(undefined);
   const [singleLoading, setSingleLoading] = useState<boolean>(false);
-
   const searchId = extractBookId(pathname);
+  const navigate = useNavigate();
+
+  const isMatched = books.some((item: Book) => +item?.id == searchId);
 
   useEffect(() => {
     const getSingleBookData = async () => {
-      if (searchId) {
+      if (searchId && isMatched) {
         setSingleLoading(true);
         try {
           const response = await axios.get(
@@ -25,7 +31,6 @@ const SingleBook = () => {
             }/books/${searchId}`
           );
           setSingleBook(response.data.book);
-          setSingleLoading(false);
         } catch (error: any) {
           console.log(error);
           Swal.fire({
@@ -33,25 +38,26 @@ const SingleBook = () => {
             text: error.response.data.message,
             icon: "error",
           });
+        } finally {
+          setSingleLoading(false);
         }
       }
     };
     getSingleBookData();
-  }, [searchId]);
+  }, [searchId, isMatched]);
+
+  useEffect(() => {
+    if (!isMatched) {
+      navigate("/");
+    }
+  }, [singleBook, isMatched, navigate]);
 
   return (
-    <div>
+    <>
       <Navbar />
-      {singleLoading ? (
-        <Loading />
-      ) : (
-        <div>
-          <h1>{singleBook?.title}</h1>
-          <p>{singleBook?.author}</p>
-          <p>{singleBook?.description}</p>
-        </div>
-      )}
-    </div>
+      <BookForm />
+      {singleLoading ? <Loading /> : <SingleBookCard book={singleBook} />}
+    </>
   );
 };
 

@@ -1,16 +1,11 @@
 import React from "react";
 import { getTruncateLength, truncateText } from "../helpers/functions";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import { FaEdit } from "react-icons/fa";
-import { BookContext } from "../context/BookContext";
+
 import noImage from "../assets/no-image.png";
 import useWindowSize from "../hooks/useWindowSize";
+import BookSettings from "./BookSettings";
 
 const BookCard = ({ book }: { book: Book }) => {
-  const { handleEdit, handleDelete } = React.useContext(
-    BookContext
-  ) as BookContextType;
-
   const { width } = useWindowSize();
   const [truncateLength, setTruncateLength] = React.useState<number>(25);
 
@@ -72,14 +67,7 @@ const BookCard = ({ book }: { book: Book }) => {
               ISBN: {isbn}
             </span>
             <div className="flex items-center mt-1 md:mt-0 justify-center gap-1">
-              <RiDeleteBin6Fill
-                onClick={() => handleDelete(id)}
-                className="text-sm md:text-md lg:text-lg cursor-pointer text-red-500 hover:scale-125 hover:text-red-300"
-              />
-              <FaEdit
-                onClick={() => handleEdit(book)}
-                className="text-sm md:text-md lg:text-lg cursor-pointer text-orange-400 hover:scale-125 hover:text-orange-300"
-              />
+              <BookSettings id={id} book={book} />
             </div>
           </div>
         </div>

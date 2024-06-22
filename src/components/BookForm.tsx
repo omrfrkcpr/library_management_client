@@ -119,7 +119,7 @@ const BookForm = () => {
               {renderFormFields()}
               <div className="text-center">
                 <button
-                  disabled={!loading}
+                  disabled={loading}
                   className={`${
                     loading ? "py-0" : "py-1"
                   } px-3 w-[130px] mt-5 rounded-xl text-white transition-all cursor-pointer ${
