@@ -3,6 +3,17 @@ import React from "react";
 import { IoMdClose } from "react-icons/io";
 import { BookContext } from "../context/BookContext";
 
+const formFields = [
+  { id: "title", label: "Title", type: "text" },
+  { id: "author", label: "Author", type: "text" },
+  { id: "description", label: "Description", type: "text" },
+  { id: "isbn", label: "ISBN", type: "text" },
+  { id: "genre", label: "Genre", type: "text" },
+  { id: "publicationYear", label: "Publication Year", type: "number" },
+  { id: "image", label: "Image URL", type: "text" },
+  { id: "detailUrl", label: "Detail URL", type: "text" },
+];
+
 const BookForm = () => {
   const {
     form,
@@ -55,6 +66,30 @@ const BookForm = () => {
     setEditMode(false);
   };
 
+  const renderFormFields = () =>
+    formFields.map((field) => (
+      <div className="space-x-2 flex justify-between" key={field?.id}>
+        <label className="text-sm md:text-md" htmlFor={field?.id}>
+          {field?.label}:
+        </label>
+        <input
+          type={field?.type}
+          id={field?.id}
+          className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
+          name={field.id}
+          value={form?.[field?.id] || ""}
+          required
+          onChange={(e) =>
+            setForm({
+              ...form,
+              [field?.id]:
+                field?.type === "number" ? +e.target.value : e.target.value,
+            })
+          }
+        />
+      </div>
+    ));
+
   return (
     <>
       {isVisible && (
@@ -76,120 +111,7 @@ const BookForm = () => {
               <div className="text-2xl text-center mb-4 border-b border-gray-400">
                 Book Information
               </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="title">
-                  Title:
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="title"
-                  value={form?.title || ""}
-                  onChange={(e) => setForm({ ...form, title: e.target.value })}
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="author">
-                  Author:
-                </label>
-                <input
-                  type="text"
-                  id="author"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="author"
-                  value={form?.author || ""}
-                  onChange={(e) => setForm({ ...form, author: e.target.value })}
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="description">
-                  Description:
-                </label>
-                <input
-                  type="text"
-                  id="description"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="description"
-                  value={form?.description || ""}
-                  onChange={(e) =>
-                    setForm({ ...form, description: e.target.value })
-                  }
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="isbn">
-                  ISBN:
-                </label>
-                <input
-                  type="text"
-                  id="isbn"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="isbn"
-                  value={form?.isbn || ""}
-                  onChange={(e) => setForm({ ...form, isbn: e.target.value })}
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="genre">
-                  Genre:
-                </label>
-                <input
-                  type="text"
-                  id="genre"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="genre"
-                  value={form?.genre || ""}
-                  onChange={(e) => setForm({ ...form, genre: e.target.value })}
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="publicationYear">
-                  Publication Year:
-                </label>
-                <input
-                  type="number"
-                  id="publicationYear"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="publicationYear"
-                  value={
-                    (form?.publicationYear === 0
-                      ? ""
-                      : form?.publicationYear) || ""
-                  }
-                  onChange={(e) =>
-                    setForm({ ...form, publicationYear: +e.target.value })
-                  }
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="image">
-                  Image URL:
-                </label>
-                <input
-                  type="text"
-                  id="image"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="image"
-                  value={form?.image || ""}
-                  onChange={(e) => setForm({ ...form, image: e.target.value })}
-                />
-              </div>
-              <div className="space-x-2 flex justify-between">
-                <label className="text-sm md:text-md" htmlFor="detailUrl">
-                  Detail URL:
-                </label>
-                <input
-                  type="text"
-                  id="detailUrl"
-                  className="outline-none border border-gray-500 rounded-xl px-3 text-sm md:py-1"
-                  name="detailUrl"
-                  value={form?.detailUrl || ""}
-                  onChange={(e) =>
-                    setForm({ ...form, detailUrl: e.target.value })
-                  }
-                />
-              </div>
+              {renderFormFields()}
               <div className="text-center">
                 <button
                   className={`py-1 px-3 w-[130px] mt-5 rounded-xl text-white transition-all ${

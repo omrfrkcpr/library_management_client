@@ -6,11 +6,9 @@ import { BookProvider } from "./context/BookContext";
 function App() {
   return (
     <BookProvider>
-      <div className="relative">
-        <BookForm />
-        <Navbar />
-        <BookList />
-      </div>
+      <BookForm />
+      <Navbar />
+      <BookList />
     </BookProvider>
   );
 }

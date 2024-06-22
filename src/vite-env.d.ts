@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
@@ -8,7 +9,7 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
-interface Form {
+type Form = {
   title: string;
   author: string;
   genre: string;
@@ -17,7 +18,7 @@ interface Form {
   description: string;
   image: string;
   detailUrl: string;
-}
+} & Record<string, any>;
 
 interface Book extends Form {
   id: string;
