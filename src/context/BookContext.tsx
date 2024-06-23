@@ -27,6 +27,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
   const [showForm, setShowForm] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editBookId, setEditBookId] = useState<string>("");
+  const [isEdited, setIsEdited] = useState<boolean>(false);
 
   const getBooksData = async () => {
     setLoading(true);
@@ -77,6 +78,13 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
             icon: "success",
           });
           setEditMode(false);
+          setIsEdited(true);
+
+          // single book will be refreshed in 3s
+          setTimeout(() => {
+            setIsEdited(false);
+          }, 3000);
+
           setShowForm(false);
           setForm(initialFormState);
           getBooksData();
@@ -185,6 +193,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
     initialFormState,
     loading,
     setLoading,
+    isEdited,
   };
 
   return (

@@ -12,7 +12,7 @@ import { BookContext } from "../context/BookContext";
 
 const SingleBook = () => {
   const { pathname } = useLocation();
-  const { books } = useContext(BookContext) as BookContextType;
+  const { books, isEdited } = useContext(BookContext) as BookContextType;
   const [singleBook, setSingleBook] = useState<Book | undefined>(undefined);
   const [singleLoading, setSingleLoading] = useState<boolean>(false);
   const searchId = extractBookId(pathname);
@@ -44,7 +44,7 @@ const SingleBook = () => {
       }
     };
     getSingleBookData();
-  }, [searchId, isMatched]);
+  }, [searchId, isMatched, isEdited]);
 
   useEffect(() => {
     if (!isMatched) {
@@ -53,11 +53,11 @@ const SingleBook = () => {
   }, [singleBook, isMatched, navigate]);
 
   return (
-    <>
-      <Navbar />
+    <div className="relative">
       <BookForm />
+      <Navbar />
       {singleLoading ? <Loading /> : <SingleBookCard book={singleBook} />}
-    </>
+    </div>
   );
 };
 

@@ -5,13 +5,13 @@ const SingleBookCard = ({ book }: { book: Book | undefined }) => {
   return (
     <>
       {book && (
-        <div className="relative m-5 w-[95%] max-w-[1200px] shadow-xl h-auto mx-auto rounded-xl overflow-hidden flex flex-col md:flex-row text-center md:text-left items-center md:items-start gap-2">
+        <div className="relative m-5 w-[95%] max-w-[1200px] shadow-xl h-auto min-h-[fit-content] mx-auto rounded-xl overflow-hidden flex flex-col md:flex-row text-center md:text-left items-center md:items-start gap-2">
           <img
             src={book?.image}
             alt={`${book?.title.split(" ").join("_").toLowerCase()}`}
-            className="w-[150px] md:w-[400px] object-fit"
+            className="w-[150px] md:w-[330px] h-full object-contain"
           />
-          <div className="p-4">
+          <div className="p-4 max-w-[850px] flex flex-col items-center md:items-start">
             <div className="flex gap-2 items-center">
               <h2 className="text-2xl font-bold">{book?.title}</h2>
               <a

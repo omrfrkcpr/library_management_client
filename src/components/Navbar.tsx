@@ -4,12 +4,14 @@ import logo from "../assets/logo.svg";
 import { BookContext } from "../context/BookContext";
 import { CiSearch } from "react-icons/ci";
 import SearchBar from "./SearchBar";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosAdd } from "react-icons/io";
+import { IoHome } from "react-icons/io5";
 
 export default function Navbar() {
   const { setShowForm } = useContext(BookContext) as BookContextType;
   const [showSearchBar, setShowSearchBar] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   return (
@@ -33,7 +35,14 @@ export default function Navbar() {
               <CiSearch className="w-5 h-5 md:w-8 md:h-8 hover:text-gray-400 duration-300" />
             </button>
           )}
-          {!pathname.includes("book/") && (
+          {pathname.includes("book/") ? (
+            <button
+              onClick={() => navigate("/")}
+              className="bg-red-500 text-white hover:text-red-500 font-bold hover:bg-gray-100 border border-red-500 rounded-full duration-300"
+            >
+              <IoHome className="w-7 h-7 md:w-10 md:h-10 p-1" />
+            </button>
+          ) : (
             <button
               onClick={() => setShowForm(true)}
               className="bg-red-500 text-white hover:text-red-500 font-bold hover:bg-gray-100 border border-red-500 rounded-full duration-300"

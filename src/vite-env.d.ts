@@ -41,4 +41,5 @@ interface BookContextType {
   initialFormState: Form;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isEdited: boolean;
 }
