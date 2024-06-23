@@ -12,17 +12,16 @@ import { BookContext } from "../context/BookContext";
 
 const SingleBook = () => {
   const { pathname } = useLocation();
-  const { books, isEdited } = useContext(BookContext) as BookContextType;
+  const { isEdited } = useContext(BookContext) as BookContextType;
   const [singleBook, setSingleBook] = useState<Book | undefined>(undefined);
   const [singleLoading, setSingleLoading] = useState<boolean>(false);
+  const [isBookExist, setIsBookExist] = useState<boolean>(true); // Kitap var mı kontrolü için yeni state
   const searchId = extractBookId(pathname);
   const navigate = useNavigate();
 
-  const isMatched = books.some((item: Book) => +item?.id == searchId);
-
   useEffect(() => {
     const getSingleBookData = async () => {
-      if (searchId && isMatched) {
+      if (searchId) {
         setSingleLoading(true);
         try {
           const response = await axios.get(
@@ -31,6 +30,7 @@ const SingleBook = () => {
             }/books/${searchId}`
           );
           setSingleBook(response.data.book);
+          setIsBookExist(true); // Kitap mevcutsa true yap
         } catch (error: any) {
           console.log(error);
           Swal.fire({
@@ -38,19 +38,20 @@ const SingleBook = () => {
             text: error.response.data.message,
             icon: "error",
           });
+          setIsBookExist(false); // Kitap bulunamazsa false yap
         } finally {
           setSingleLoading(false);
         }
       }
     };
     getSingleBookData();
-  }, [searchId, isMatched, isEdited]);
+  }, [searchId, isEdited]);
 
   useEffect(() => {
-    if (!isMatched) {
+    if (!isBookExist) {
       navigate("/");
     }
-  }, [singleBook, isMatched, navigate]);
+  }, [isBookExist, navigate]);
 
   return (
     <div className="relative">

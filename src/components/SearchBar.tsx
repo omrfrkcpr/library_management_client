@@ -44,7 +44,7 @@ const SearchBar = ({
   });
 
   const handleBookSelect = (bookId: string) => {
-    navigate(`/book/${bookId}`);
+    navigate(`/books/${bookId}`);
     setShowSearchBar(false); // Close the search bar after selection
   };
 

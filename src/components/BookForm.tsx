@@ -64,7 +64,12 @@ const BookForm = () => {
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (formDiv.current && !formDiv.current.contains(event.target as Node)) {
+      const errorModal = document.querySelector(".swal2-container"); // if any error exist, func should not be triggered.
+      if (
+        formDiv.current &&
+        !formDiv.current.contains(event.target as Node) &&
+        !errorModal
+      ) {
         setShowForm(false);
         setForm(initialFormState);
         setEditMode(false);
