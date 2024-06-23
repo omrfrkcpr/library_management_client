@@ -101,7 +101,7 @@ const BookForm = () => {
         <div className="w-[100%] h-[100%] bg-white/80 fixed z-50">
           <div
             ref={formDiv}
-            className={`w-[96%] max-w-[600px] h-auto p-6 md:p-10 bg-purple-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
+            className={`w-[96%] max-w-[600px] h-auto p-6 md:p-10 bg-red-100 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] duration-400 transition-opacity shadow-xl ${
               showForm ? "opacity-100" : "opacity-0"
             }`}
           >
