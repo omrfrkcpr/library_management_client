@@ -264,8 +264,8 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 
 ## Acknowledgments
 
-- [server](https://novelit-server.onrender.com/books)
-- [server-repo](https://github.com/omrfrkcpr/novelit_server)
-- [postman-doc]()
+- [novelit-api](https://novelit-server.onrender.com/books)
+- [novelit-api-repo](https://github.com/omrfrkcpr/novelit_server)
+- [postman-doc](https://documenter.getpostman.com/view/14573422/2sA3drKFJ7)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
