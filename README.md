@@ -256,9 +256,9 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 
 ## Contact
 
-[Send a Email](omerrfarukcapur@gmail.com)<br />
+[Support](omerrfarukcapur@gmail.com)<br />
 [Repo Link](https://github.com/omrfrkcpr/novelit)<br />
-[Demo Link](novelit.vercel.app)
+[Demo](novelit.vercel.app)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
