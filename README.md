@@ -97,9 +97,6 @@
   <a href="https://tailwindcss.com/" >
     <img src="https://skillicons.dev/icons?i=tailwind" />
   </a>
-  <a href="https://nodejs.org/en" >
-    <img src="https://skillicons.dev/icons?i=nodejs" />
-  </a>
   <a href="https://www.postman.com/" >
     <img src="https://skillicons.dev/icons?i=postman" />
   </a>
@@ -109,6 +106,10 @@
   <a href="https://vitejs.dev/" >
     <img src="https://skillicons.dev/icons?i=vite" />
   </a>
+</p>
+
+<p align="center">
+  [![Built With](https://skillicons.dev/icons?i=react,ts,tailwind,postman,vercel,vite)](https://skillicons.dev)
 </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
