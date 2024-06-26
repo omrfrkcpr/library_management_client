@@ -46,7 +46,7 @@
     <br />
     <a href="https://github.com/omrfrkcpr/novelit"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/omrfrkcpr/novelit_server"><strong>Novelit API »</strong></a>
+    <a href="https://github.com/omrfrkcpr/novelit_api"><strong>Novelit API »</strong></a>
     <br />
     <br />
     <a href="https://novelit.vercel.app">View Demo</a>
@@ -265,7 +265,7 @@ Distributed under the MIT License. See [LICENSE.txt](https://github.com/omrfrkcp
 ## Acknowledgments
 
 - [novelit-api](https://novelit-server.onrender.com/books)
-- [novelit-api-repo](https://github.com/omrfrkcpr/novelit_server)
+- [novelit-api-repo](https://github.com/omrfrkcpr/novelit_api)
 - [postman-doc](https://documenter.getpostman.com/view/14573422/2sA3drKFJ7)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
