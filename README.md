@@ -109,7 +109,7 @@
 </p>
 
 <p align="center">
-  [![Built With](https://skillicons.dev/icons?i=react,ts,tailwind,postman,vercel,vite)](https://skillicons.dev)
+  [![My Skills](https://skillicons.dev/icons?i=react,ts,tailwind,postman,vercel,vite)](https://skillicons.dev)
 </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
