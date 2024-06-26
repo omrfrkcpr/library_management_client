@@ -25,9 +25,7 @@ const SingleBook = () => {
         setSingleLoading(true);
         try {
           const response = await axios.get(
-            `${import.meta.env.VITE_SERVER_HOST}:${
-              import.meta.env.VITE_SERVER_PORT
-            }/books/${searchId}`
+            `${import.meta.env.VITE_SERVER_HOST}/books/${searchId}`
           );
           setSingleBook(response.data.book);
           setIsBookExist(true); // Kitap mevcutsa true yap

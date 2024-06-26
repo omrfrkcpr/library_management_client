@@ -33,9 +33,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_HOST}:${
-          import.meta.env.VITE_SERVER_PORT
-        }/books`
+        `${import.meta.env.VITE_SERVER_HOST}/books`
       );
       setBooks(response.data.books);
     } catch (error: any) {
@@ -67,9 +65,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
         setLoading(true);
         try {
           await axios.put(
-            `${import.meta.env.VITE_SERVER_HOST}:${
-              import.meta.env.VITE_SERVER_PORT
-            }/books/${editBookId}`,
+            `${import.meta.env.VITE_SERVER_HOST}/books/${editBookId}`,
             form
           );
           Swal.fire({
@@ -102,12 +98,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
     } else {
       setLoading(true);
       try {
-        await axios.post(
-          `${import.meta.env.VITE_SERVER_HOST}:${
-            import.meta.env.VITE_SERVER_PORT
-          }/books`,
-          form
-        );
+        await axios.post(`${import.meta.env.VITE_SERVER_HOST}/books`, form);
         Swal.fire({
           title: "Success!",
           text: "New Book is successfully added!",
@@ -143,11 +134,7 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
     if (result.isConfirmed) {
       setLoading(true);
       try {
-        await axios.delete(
-          `${import.meta.env.VITE_SERVER_HOST}:${
-            import.meta.env.VITE_SERVER_PORT
-          }/books/${id}`
-        );
+        await axios.delete(`${import.meta.env.VITE_SERVER_HOST}/books/${id}`);
         Swal.fire({
           title: "Deleted!",
           text: "Book has been successfully deleted.",
