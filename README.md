@@ -217,6 +217,8 @@ Backend:
 
 - Node.js: A JavaScript runtime built on Chrome's V8 engine.
 - Express.js: A minimal and flexible Node.js web application framework.
+- SQLite: A lightweight, disk-based database that doesn’t require a separate server process. Ideal for small to medium-sized applications.
+- Sequelize: A promise-based Node.js ORM for SQLite, providing a straightforward API for interacting with the database and managing data models.
 
 Tools:
 
