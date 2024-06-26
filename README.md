@@ -80,7 +80,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![novelit](https://github.com/omrfrkcpr/novelit/assets/77440899/b2d120be-5b71-481d-b9a0-c5aae3403de7)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
