@@ -88,29 +88,8 @@
 ### Built With
 
 <p align="center">
-  <a href="https://react.dev/" >
-    <img src="https://skillicons.dev/icons?i=react" />
-  </a>
-  <a href="https://www.typescriptlang.org/" >
-    <img src="https://skillicons.dev/icons?i=ts" />
-  </a>
-  <a href="https://tailwindcss.com/" >
-    <img src="https://skillicons.dev/icons?i=tailwind" />
-  </a>
-  <a href="https://www.postman.com/" >
-    <img src="https://skillicons.dev/icons?i=postman" />
-  </a>
-  <a href="https://vercel.com/" >
-    <img src="https://skillicons.dev/icons?i=vercel" />
-  </a>
-  <a href="https://vitejs.dev/" >
-    <img src="https://skillicons.dev/icons?i=vite" />
-  </a>
-</p>
-
-<p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=git,kubernetes,docker,c,vim" />
+    <img src="https://skillicons.dev/icons?i=react,ts,tailwind,postman,vercel,vite" />
   </a>
 </p>
 
