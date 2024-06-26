@@ -88,25 +88,25 @@
 ### Built With
 
 <p align="center">
-  <a href="https://react.dev/">
+  <a href="https://react.dev/" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=react" />
   </a>
-  <a href="https://www.typescriptlang.org/">
+  <a href="https://www.typescriptlang.org/" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=ts" />
   </a>
-  <a href="https://tailwindcss.com/">
+  <a href="https://tailwindcss.com/" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=tailwind" />
   </a>
-  <a href="https://nodejs.org/en">
+  <a href="https://nodejs.org/en" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=nodejs" />
   </a>
-  <a href="https://www.postman.com/">
+  <a href="https://www.postman.com/" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=postman" />
   </a>
-  <a href="https://vercel.com/">
+  <a href="https://vercel.com/" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=vercel" />
   </a>
-  <a href="https://vitejs.dev/">
+  <a href="https://vitejs.dev/" style="text-decoration: none; margin: 0 15px;">
     <img src="https://skillicons.dev/icons?i=vite" />
   </a>
 </p>
