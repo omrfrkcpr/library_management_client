@@ -45,6 +45,7 @@
     Novelit is a user-friendly full-stack application designed to provide users with a robust platform for managing detailed information about books. This project is an excellent tool for book enthusiasts, librarians, and anyone who needs to maintain a personalized database of books. With its modern tech stack, efficient search capabilities, and intuitive UI, Novelit stands out as an essential tool for book lovers and professionals alike.
     <br />
     <a href="https://github.com/omrfrkcpr/novelit"><strong>Explore the docs »</strong></a>
+    <br />
     <a href="https://github.com/omrfrkcpr/novelit_server"><strong>Novelit API »</strong></a>
     <br />
     <br />
