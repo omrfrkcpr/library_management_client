@@ -43,7 +43,11 @@ const SingleBook = () => {
   }, [searchId, isEdited]);
 
   useEffect(() => {
-    if (!books.some((item) => Number(item.id) === searchId)) {
+    if (!Array.isArray(books)) {
+      return;
+    }
+
+    if (!books.some((item: Book) => Number(item?._id) === Number(searchId))) {
       navigate("/");
     }
   }, [searchId, navigate, books]);
