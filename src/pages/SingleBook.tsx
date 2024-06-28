@@ -12,10 +12,9 @@ import { BookContext } from "../context/BookContext";
 
 const SingleBook = () => {
   const { pathname } = useLocation();
-  const { isEdited } = useContext(BookContext) as BookContextType;
+  const { isEdited, books } = useContext(BookContext) as BookContextType;
   const [singleBook, setSingleBook] = useState<Book | undefined>(undefined);
   const [singleLoading, setSingleLoading] = useState<boolean>(false);
-  const [isBookExist, setIsBookExist] = useState<boolean>(true); // Kitap var mı kontrolü için yeni state
   const searchId = extractBookId(pathname);
   const navigate = useNavigate();
 
@@ -28,7 +27,6 @@ const SingleBook = () => {
             `${import.meta.env.VITE_SERVER_HOST}/books/${searchId}`
           );
           setSingleBook(response.data.book);
-          setIsBookExist(true); // Kitap mevcutsa true yap
         } catch (error: any) {
           console.log(error);
           Swal.fire({
@@ -36,7 +34,6 @@ const SingleBook = () => {
             text: error.response.data.message,
             icon: "error",
           });
-          setIsBookExist(false); // Kitap bulunamazsa false yap
         } finally {
           setSingleLoading(false);
         }
@@ -46,10 +43,10 @@ const SingleBook = () => {
   }, [searchId, isEdited]);
 
   useEffect(() => {
-    if (!isBookExist) {
+    if (!books.some((item) => Number(item.id) === searchId)) {
       navigate("/");
     }
-  }, [isBookExist, navigate]);
+  }, [searchId, navigate, books]);
 
   return (
     <div className="relative">
