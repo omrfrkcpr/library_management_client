@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { extractBookId } from "../helpers/functions";
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -12,10 +12,11 @@ import { BookContext } from "../context/BookContext";
 
 const SingleBook = () => {
   const { pathname } = useLocation();
-  const { isEdited } = useContext(BookContext) as BookContextType;
+  const { isEdited, books } = useContext(BookContext) as BookContextType;
   const [singleBook, setSingleBook] = useState<Book | undefined>(undefined);
   const [singleLoading, setSingleLoading] = useState<boolean>(false);
   const searchId = extractBookId(pathname);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSingleBookData = async () => {
@@ -40,6 +41,15 @@ const SingleBook = () => {
     };
     getSingleBookData();
   }, [searchId, isEdited]);
+
+  useEffect(() => {
+    if (
+      pathname.includes("book/") &&
+      !books.some((item: Book) => Number(item?.id) === searchId)
+    ) {
+      navigate("/");
+    }
+  }, [searchId, books, pathname, navigate]);
 
   return (
     <div className="relative">
