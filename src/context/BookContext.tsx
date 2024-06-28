@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-// import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const BookContext = createContext<BookContextType | undefined>(
   undefined
@@ -29,8 +29,8 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
   const [editMode, setEditMode] = useState<boolean>(false);
   const [editBookId, setEditBookId] = useState<string>("");
   const [isEdited, setIsEdited] = useState<boolean>(false);
-  // const navigate = useNavigate();
-  // const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const getBooksData = async () => {
     setLoading(true);
@@ -144,13 +144,6 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
           icon: "success",
         });
         getBooksData();
-
-        // if (
-        //   pathname.includes("books/") &&
-        //   books.some((item: Book) => item?.id !== id)
-        // ) {
-        //   navigate("/");
-        // }
       } catch (error: any) {
         console.log(error);
         Swal.fire({
@@ -160,6 +153,12 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
         });
       } finally {
         setLoading(false);
+        if (
+          pathname.includes("books/") &&
+          books.some((item: Book) => item?.id !== id)
+        ) {
+          navigate("/");
+        }
       }
     }
   };
