@@ -16,7 +16,6 @@ const SingleBook = () => {
   const [singleBook, setSingleBook] = useState<Book | undefined>(undefined);
   const [singleLoading, setSingleLoading] = useState<boolean>(false);
   const searchId = extractBookId(pathname);
-  // const navigate = useNavigate();
 
   useEffect(() => {
     const getSingleBookData = async () => {
@@ -41,16 +40,6 @@ const SingleBook = () => {
     };
     getSingleBookData();
   }, [searchId, isEdited]);
-
-  // useEffect(() => {
-  //   if (!Array.isArray(books)) {
-  //     return;
-  //   }
-
-  //   if (books.some((item: Book) => Number(item?.id) !== Number(searchId))) {
-  //     navigate("/");
-  //   }
-  // }, [searchId, navigate, books]);
 
   return (
     <div className="relative">
