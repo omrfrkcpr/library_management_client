@@ -145,12 +145,12 @@ export const BookProvider: React.FC<{ children: ReactNode }> = ({
         });
         getBooksData();
 
-        if (
-          pathname.includes("books/") &&
-          books.some((item: Book) => item?.id !== id)
-        ) {
-          navigate("/");
-        }
+        // if (
+        //   pathname.includes("books/") &&
+        //   books.some((item: Book) => item?.id !== id)
+        // ) {
+        //   navigate("/");
+        // }
       } catch (error: any) {
         console.log(error);
         Swal.fire({
