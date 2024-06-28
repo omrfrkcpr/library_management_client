@@ -47,7 +47,7 @@ const SingleBook = () => {
       return;
     }
 
-    if (books.some((item: Book) => Number(item?._id) !== Number(searchId))) {
+    if (books.some((item: Book) => Number(item?.id) !== Number(searchId))) {
       navigate("/");
     }
   }, [searchId, navigate, books]);
