@@ -58,7 +58,7 @@ const BookCard = ({ book }: { book: Book }) => {
         </div>
         <div className="flex flex-col border-t-[1px] border-gray-300 pt-2 absolute bottom-0 w-[88%] lg:w-[465px] pb-2">
           <div className="flex justify-between">
-            <span className="flex items-center w-[fit-content] overflow-auto justify-start bg-gray-200 rounded-full px-1 md:px-2 py-1 text-[10px] md:text-md font-semibold text-gray-700">
+            <span className="flex items-center w-[fit-content] max-w-[150px] overflow-auto justify-start bg-gray-200 rounded-full px-1 md:px-3 py-1 text-[8px] md:text-md lg:text-[14px] font-semibold text-gray-700">
               #{genre}
             </span>
             <span className="flex items-center w-[fit-content] overflow-auto justify-start rounded-full px-1 md:px-3 py-1 text-[10px] md:text-md lg:text-[14px] text-gray-700 gap-1">
